@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>77 Tech project management collaboration</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+@csrf
 <link href="{{ asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+<script src="{{ asset('js/jquery.min.js') }}"  crossorigin="anonymous"></script> 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" >
+
+
 <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 <div class="container-fluid menu">

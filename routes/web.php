@@ -29,6 +29,19 @@ Route::group(['prefix' => 'signup'], function() {
     
     Route::get('/','SignupController@index');
     Route::get('/step1','SignupController@step1');
+    Route::get('/checkverification','SignupController@checkverificationmail')->name("checkverification");
+    Route::get('/sendverification','SignupController@sendverificationmail');
+    Route::post('/verifysignupemail','SignupController@verifysignupemail');
+
+    Route::get('/step2','SignupController@step2');
+    Route::post('/poststep2','SignupController@poststep2')->name('poststep2');
+
+    Route::get('/step3','SignupController@step3');
+    Route::post('/poststep3','SignupController@poststep3')->name('poststep3');
+
+    Route::get('/step4','SignupController@step4');
+
+    
     
 });
 

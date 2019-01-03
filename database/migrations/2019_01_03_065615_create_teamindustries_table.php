@@ -1,9 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserverificationTable extends Migration
+class CreateTeamindustriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,10 @@ class CreateUserverificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('UserEmailVerification', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('teamindustries', function (Blueprint $table) {
+            $table->engine="InnoDB";
             $table->integer('id',true);
-            $table->string('emailaddress');
-            $table->string('password');
-            $table->string('token');
-            $table->integer("validfor")->default('600');
+            $table->string('title');
             $table->boolean('status');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ class CreateUserverificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('UserEmailVerification');
+        Schema::dropIfExists('teamindustries');
     }
 }

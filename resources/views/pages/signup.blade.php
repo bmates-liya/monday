@@ -1,5 +1,11 @@
 @extends('layouts.singlecolumn')
 @section('content')
+<div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+        Verification code
+    </div>
+  </div>
 <div class="container-fluid banner-sec">
     <div class="container">
       <div class="row">
