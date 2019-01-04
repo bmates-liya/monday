@@ -5,8 +5,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 use App\Userverification;
 use App\Teamindustry;
+use App\company;
+use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Contracts\Auth\Authenticatable;
+
 
 use Mail;
 use Cookie;
@@ -14,11 +20,19 @@ use Cookie;
 class SignupController extends Controller
 {
     //
+    use AuthenticatesUsers;
     public function index()
     {
         $data="";
         return view('pages.signup.step1',['init'=>$data] );
         ;
+    }
+
+    public function createuser()
+    {
+       
+        $data="";
+        return view('pages.signup.signup',['init'=>$data] );
     }
 
     public function step1()
@@ -38,7 +52,30 @@ class SignupController extends Controller
         echo \json_encode($data);
    
     }
+    public function createuserpost(Request $request)
+    {
+        
+        $emailid= $request->cookie('remail');
+        $token= $request->cookie('token');
+        $password= $request->get('password');
+        $name=$request->get('fullname');
+        Cookie::queue(Cookie::make('name',  $name, 3600));
+        $request->validate([
+            'fullname' => 'required',
+            'password' => 'required',
+            'phone'=>'numeric'
+        ]);
 
+        $usverification=new Userverification;
+        $saveapassword=$usverification::where('emailaddress', $emailid)
+                        ->where('token', $token)
+                        ->update(['password' => $password]);
+        if($saveapassword)
+        {
+            return \redirect('signup/step2');
+        }
+
+    }
     public function verifysignupemail(Request $request)
     {
         
@@ -55,7 +92,7 @@ class SignupController extends Controller
             //return $response;
 
             Cookie::queue(Cookie::make('remail',  $emailid, 3600));
-
+            Cookie::queue(Cookie::make('token',  $token, 3600));
 
             //$cookie = Cookie::make('email', $emailid);
             
@@ -149,6 +186,8 @@ class SignupController extends Controller
         
     }
 
+   
+
 
 
     public function step4(Request $request)
@@ -158,6 +197,77 @@ class SignupController extends Controller
         
        
         return view('pages.signup.step4')->with($data);
+    }
+
+    public function poststep4(Request $request)
+    {
+        $request->validate([
+            'Account' => 'required'    
+        ]);
+        
+        $emailid= $request->cookie('remail');
+        $token= $request->cookie('token');
+        $password= $request->get('password');
+        $TeamIndustry= $request->cookie('TeamIndustry');
+        $Memberslimit= $request->cookie('Memberslimit');    
+        
+        
+        
+        $companymodel=new company;
+        $companymodel->companyname=$request->get('Account');
+        $companymodel->description=$request->cookie('teamname');
+        $companymodel->teamstrength=$Memberslimit;
+        $companymodel->warea=$TeamIndustry;
+        $companymodel->logoimage='0';
+        $companymodel->headerimage='0';
+        $companymodel->currentplan='1';
+        $companymodel->status='1';
+        $company=$companymodel->save();
+        $lastid=$companymodel->id;
+
+        if($company)
+        {
+
+            $Userverificationdetail=\App\Userverification::where(['emailaddress'=>$emailid,'token'=>$token])->first();
+              
+           
+            
+                $user = new \App\User();
+                $user->password = Hash::make($Userverificationdetail->password);
+                $user->email = $emailid;
+                $user->name = $request->cookie('name');
+                $user->phoneno = "";
+                $user->companyid = $lastid;
+                $user->status = 1;
+                $user->save();
+                $remember=true;
+                if($user)
+                {
+                    $password = $Userverificationdetail->password;
+                    echo $email = $emailid;
+
+                    if (Auth::attempt(['email' => $email, 'password' => $password]) )
+                    {
+                        return redirect()->intended('/home');
+                    }   
+                    else 
+                    {
+                        return redirect()->intended('/signup/step1');
+                    }
+                    
+                }
+           
+            
+        }
+
+
+        
+
+
+        //Cookie::queue(Cookie::make('TeamIndustry',  $request->get('TeamIndustry'), 3600));
+        
+        //return \redirect('signup/step4');
+        
     }
 
 }

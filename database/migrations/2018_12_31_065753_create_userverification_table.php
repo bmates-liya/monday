@@ -5,18 +5,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUserverificationTable extends Migration
 {
-    /**
+    /*
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('UserEmailVerification', function (Blueprint $table) {
+        Schema::create('UserEmailVerification', function (Blueprint $table)
+        {
             $table->engine = 'InnoDB';
             $table->integer('id',true);
             $table->string('emailaddress');
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('token');
             $table->integer("validfor")->default('600');
             $table->boolean('status');

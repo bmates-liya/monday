@@ -25,14 +25,14 @@
             <p style="font-size:18px;">How many people do you want to collaborate with?</p>
             <ul class="list-inline ">
             <li class="float-left" value="1"><a >Only me</a></li>
-            <li class="float-left" value="5"><a >2-5</a></li>
-            <li class="float-left" value="10"><a >6-10</a></li>
-            <li class="float-left" value="15"><a >11-15</a></li>
-            <li class="float-left" value="25"><a >16-25</a></li>
-            <li class="float-left" value="50"><a >26-50</a></li>
-            <li class="float-left"  value="100"><a >51-100</a></li>
-            <li class="float-left" value="500"><a >101-500</a></li>
-            <li class="float-left" value="5000"><a >500+</a></li>
+            <li class="float-left" value="2"><a >2-5</a></li>
+            <li class="float-left" value="3"><a >6-10</a></li>
+            <li class="float-left" value="4"><a >11-15</a></li>
+            <li class="float-left" value="5"><a >16-25</a></li>
+            <li class="float-left" value="6"><a >26-50</a></li>
+            <li class="float-left"  value="7"><a >51-100</a></li>
+            <li class="float-left" value="8"><a >101-500</a></li>
+            <li class="float-left" value="9"><a >500+</a></li>
             
             </ul>
           </div>

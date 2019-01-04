@@ -18,33 +18,24 @@
               <div class="col-sm-6 form-inline" style="">
                   
                   
-                      <div class="form-group col-2">
-                          
-                       <input maxlength="1" type="txt_1" class="form-control col-10" id="txt_1" name="txt_1" placeholder="">
-                         
+                      <div class="form-group col-2">    
+                       <input maxlength="1" type="txt_1" class="form-control col-10" id="txt_1" name="txt_1" placeholder="" autocomplete="off">  
                       </div>
-                      
-                      <div class="form-group col-2">
-                         
-                       <input maxlength="1" type="txt_2" class="form-control col-10" id="txt_2" name="txt_2" placeholder="">
-                    </div>
-                      <div class="form-group col-2">
-                         
-                       <input maxlength="1" type="txt_3" class="form-control col-10" id="txt_3" name="txt_3" placeholder="">
+                      <div class="form-group col-2">   
+                       <input maxlength="1" type="txt_2" class="form-control col-10" id="txt_2" name="txt_2" placeholder="" autocomplete="off">
+                      </div>
+                      <div class="form-group col-2">   
+                       <input maxlength="1" type="txt_3" class="form-control col-10" id="txt_3" name="txt_3" placeholder="" autocomplete="off">
+                      </div>
+                      <div class="form-group col-2">   
+                          <input maxlength="1" type="txt_4" class="form-control col-10" id="txt_4" id="txt_4" placeholder="" autocomplete="off">
                       </div>
                       <div class="form-group col-2">
-                         
-                          <input maxlength="1" type="txt_4" class="form-control col-10" id="txt_4" id="txt_4" placeholder="">
-                         </div>
-                         <div class="form-group col-2">
-                         
-                            <input maxlength="1" type="txt_5" class="form-control col-10" id="txt_5" id="txt_5" placeholder="">
-                           </div>
-                           <div class="form-group col-2">
-                         
-                           <input maxlength="1" type="txt_6" class="form-control col-10" id="txt_6" id="txt_6" placeholder="">
-                           
-                          </div>
+                        <input maxlength="1" type="txt_5" class="form-control col-10" id="txt_5" id="txt_5" placeholder="" autocomplete="off">
+                      </div>
+                      <div class="form-group col-2">
+                        <input maxlength="1" type="txt_6" class="form-control col-10" id="txt_6" id="txt_6" placeholder="" autocomplete="off">
+                      </div>
                  
                 
                 </div>
@@ -87,7 +78,7 @@
          
           <div class="input-group mb-4">
              
-            <input id="recipientemail" name="recipientemail" type="text" class="form-control"> 
+            <input id="recipientemail" name="recipientemail" type="text" class="form-control" autocomplete="off"> 
           </div>
           
           <button id="reg" type="button" class="btn btn-primary" >Register</button>
@@ -152,7 +143,7 @@
           var obj = jQuery.parseJSON( response );
           if(obj.count>0)
           {
-            location.href="/signup/step2";
+            location.href="/signup/signup";
           }
         }
         });
@@ -209,5 +200,44 @@
           }
 
         });
+
+        $("#txt_1").keyup(function(){
+          if($("#txt_1").val()!="")
+          {
+            $("#txt_2").focus();
+          }
+          
+        });
+        $("#txt_2").keyup(function(){
+          if($("#txt_2").val()!="")
+            {
+              $("#txt_3").focus();
+            }
+          });
+          $("#txt_3").keyup(function(){
+            if($("#txt_3").val()!="")
+            {
+              $("#txt_4").focus();
+            }
+          });
+            $("#txt_4").keyup(function(){
+            if($("#txt_4").val()!="")
+            {
+              $("#txt_5").focus();
+            }
+          });
+            $("#txt_5").keyup(function(){
+            if($("#txt_5").val()!="")
+            {
+              $("#txt_6").focus();
+            }
+          });
+            $("#txt_6").keyup(function(){
+            if($("#txt_6").val()!="")
+            {
+              $("#verify").focus();
+            }
+          });
+
       </script>
       @endsection

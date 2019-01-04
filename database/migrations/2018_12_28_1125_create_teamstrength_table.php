@@ -16,7 +16,7 @@ class CreateTeamstrengthTable extends Migration
         Schema::create('teamstrength', function (Blueprint $table) {    //
             $table->integer('id', true);
             $table->string("title");
-            $table->string('workareaicon');
+            $table->integer('count');
             $table->boolean('status');
             $table->timestamps();
         });

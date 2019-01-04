@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('name',100);
             $table->string('email',100)->unique();
             $table->integer('companyid');
-            $table->string('phoneno',100);
-            $table->string('mobno',100);
+            $table->string('phoneno',100)->nullable();
+            $table->string('mobno',100)->nullable();
             $table->string('skype',100)->nullable();
             $table->string('jobtitle',100)->nullable();
             $table->integer('timezone');
